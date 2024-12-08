@@ -54,14 +54,20 @@ public class TemperatureConverter {
 
 
      // Inner class to validate temperature input
-    public class InputValidator {
+    public static class InputValidator {
         // Method to get and validate temperature input from the user
         public static double getValidTemperature(Scanner scanner) {
             double temperature = 0.0; // Initialize temperature variable
             while (true) {
                 if (scanner.hasNextDouble()) {
                     temperature = scanner.nextDouble();
-                    return temperature; // Return valid temperature
+
+                    //Extreme temperature handling
+                    if (temperature < -273.15 || temperature > 1000) {
+                        System.out.println("Invalid temperature! Please enter a temperature between -273.15°C and 1000°C.");
+                    }else {
+                        return temperature; // Return valid temperature
+                    }
                 } else {
                     // error message for invalid input
                     System.out.println("Invalid input! Please enter a number for the temperature.");
